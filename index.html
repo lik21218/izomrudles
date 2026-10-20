@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Модальные окна</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <audio id="myAudio" src="01.mp3" preload="auto" loop></audio>
+
+<!-- Кнопка управления -->
+<button id="audioToggleBtn" class="audio-btn">
+    <span class="btn-icon">▶️</span>
+    <span class="btn-text">Включить музыку</span>
+</button>
+
+    <!-- Столбик с кнопками -->
+    <div class="sidebar" id="sidebar"></div>
+
+
+    <!-- Основной контент -->
+    <div class="main-content">
+
+        <h1>Удивительная история  в изумрудном лесу</h1>
+
+        <p>
+            Котёнок Рыжик и его друзья в изумрудном  лесу
+        </p>
+
+    </div>
+
+
+    <!-- Здесь JavaScript создаст 15 модальных окон -->
+    <div id="modals"></div>
+
+    <script>
+  const audio = document.getElementById('myAudio');
+  const btn = document.getElementById('audioToggleBtn');
+  const btnIcon = btn.querySelector('.btn-icon');
+  const btnText = btn.querySelector('.btn-text');
+  
+  // СТАВИМ ТИХУЮ ГРОМКОСТЬ СРАЗУ
+  audio.volume = 0.03; // вот тут регулируй - 0.01 до 0.1 идеально для фона
+
+  btn.addEventListener('click', () => {
+      if (audio.paused) {
+          audio.play().then(() => {
+              btn.classList.add('playing');
+              btnIcon.textContent = '❚❚';
+              btnText.textContent = 'Выключить музыку';
+          }).catch(e => console.log("Автозапуск заблокирован:", e));
+      } else {
+          audio.pause();
+          btn.classList.remove('playing');
+          btnIcon.textContent = '▶';
+          btnText.textContent = 'Включить музыку';
+      }
+      
+  });
+</script>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
